@@ -1,8 +1,6 @@
 import React, { useRef } from "react";
 import { MapContainer, TileLayer, Polyline, useMapEvents, Popup } from "react-leaflet";
-import { Icon } from "leaflet";
 import "leaflet/dist/leaflet.css";
-import marker from "../Icons/drone.png"
 import AnimateMarker from "./AnimateMarker"
 import { useDispatch, useSelector } from "react-redux";
 import { addLocations } from "../app/dronesSlice";

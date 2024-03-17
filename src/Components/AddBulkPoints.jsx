@@ -1,4 +1,3 @@
-import excelToJson from 'convert-excel-to-json';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import * as XLSX from "xlsx";
