@@ -27,8 +27,9 @@ code {
 .sidebar {
   position: absolute;
   width: 20vw;
-  height: 200px;
+  height: 100vh;
   z-index: 100;
+  overflow: scroll;
 }
 
 .dronesProperties {
@@ -37,17 +38,35 @@ code {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding-bottom: 25px;
 }
 
+.addDrone {
+  display: flex;
+  justify-content: end;
+  padding: 15px;
+}
 
 button {
   background-color: black;
   color: white;
   border-radius: 8px;
+  height: 30px;
   outline: 0;
   outline: inherit;
   border: 0;
   padding: 5px 10px;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  background-color: gray;
+}
+
+.droneName {
+  font-size: 14px;
 }
 
 .dronesButtons {
@@ -55,4 +74,80 @@ button {
   justify-content: space-around;
   align-items: center;
   column-gap: 20px;
+}
+
+.progressBar {
+  width: 90%;
+  height: 3px;
+  background-color: black;
+  margin: 20px 0;
+  position: relative;
+  cursor: pointer;
+}
+
+.progressBarRed {
+  height: 3px;
+  background-color: red;
+  position: absolute;
+  cursor: pointer;
+}
+
+.droneColor {
+  width: 20px;
+  height: 20px;
+  border-radius: 20px;
+}
+
+.droneHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+}
+
+.droneInfo {
+  display: flex;
+  align-items: center;
+  column-gap: 6px;
+}
+
+.modal {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  z-index: 10001;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(128, 128, 128, 0.5);
+}
+
+.modalHeader{
+  display: flex;
+  width: 80vw;
+  justify-content: end;
+  font-weight: bold;
+  font-size: large;
+}
+
+.modalX {
+  cursor: pointer;
+  padding: 0 20px;
+}
+
+.modalBody {
+  opacity: 1;
+  width: 80vw;
+  height: 80vh;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  row-gap: 30px;
+  justify-content: center;
+  align-items: center;
+}
+
+.error {
+  color: red;
 }

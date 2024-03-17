@@ -1,34 +1,26 @@
 import React, { useRef } from "react";
-import { MapContainer, TileLayer, Polyline, useMapEvents, Marker, Popup } from "react-leaflet";
+import { MapContainer, TileLayer, Polyline, useMapEvents, Popup } from "react-leaflet";
 import { Icon } from "leaflet";
 import "leaflet/dist/leaflet.css";
 import marker from "../Icons/drone.png"
+import AnimateMarker from "./AnimateMarker"
+import { useDispatch, useSelector } from "react-redux";
+import { addLocations } from "../app/dronesSlice";
 
-const defaultCenter = [18.518658129265802, 73.85624032312973];
+const defaultCenter = [18.520835706585654, 73.85855197906496];
 const defaultZoom = 18;
 
-function MapView({ setDronesData, dronesData, selectedDrone }) {
+function MapView({ selectedDrone }) {
 	const mapRef = useRef();
-  const myIcon = new Icon({
-    iconUrl: marker,
-    iconSize: [32,52],
-   })
+  const dronesData = useSelector((state) => state.drones)
+  const dispatch = useDispatch()
 
-  const LocationFinderDummy = () => {
+  const LocationFinder = () => {
     useMapEvents({
         click(e) {
             const lat = e.latlng.lat
             const lng = e.latlng.lng
-            setDronesData(data => {
-              data = JSON.parse(JSON.stringify(data))
-              console.log('trigger')
-              
-              const idx = data.findIndex(d => d.id === selectedDrone)
-              if (idx !== -1) {
-                data[idx].locations.push([lat, lng])
-              }
-              return data
-            })
+            dispatch(addLocations({lat, lng, droneId: selectedDrone}))
         },
     });
     return null;
@@ -46,17 +38,13 @@ function MapView({ setDronesData, dronesData, selectedDrone }) {
           return <div key={idx}>
           <Polyline
 					positions={[...data.locations]}
-					color="red"
+					color={data.color}
 				/>
-        {data.currentLat && <Marker position={[data.currentLat, data.currentLng]} icon={myIcon}>
-            <Popup>
-            A pretty CSS3 popup. <br /> Easily customizable.
-          </Popup>
-          </Marker>}
+        <AnimateMarker locations={data.locations} droneId={data.id} isAnimate={data.animate} startIdx={data.startIdx} />
         </div> 
         })}
 				
-        <LocationFinderDummy />
+        <LocationFinder />
 			</MapContainer>
 		</div>
 	);
