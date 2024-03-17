@@ -29,7 +29,7 @@ function MapView({ selectedDrone }) {
 
 	return (
 		<div className="mapContiner">
-			<MapContainer ref={mapRef} center={defaultCenter} zoom={defaultZoom} onClick={(e) => console.log(e)}>
+			<MapContainer ref={mapRef} center={defaultCenter} zoom={defaultZoom}>
 				<TileLayer
 					url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
 					attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
